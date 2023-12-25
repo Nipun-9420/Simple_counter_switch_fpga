@@ -1,0 +1,3 @@
+module Simple_counter_switch_fpga();
+
+endmodule 

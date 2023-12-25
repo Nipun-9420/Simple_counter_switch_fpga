@@ -1,0 +1,12 @@
+|Simple_counter_switch_fpga
+clk => ~NO_FANOUT~
+d[7] <= <GND>
+d[6] <= <GND>
+d[5] <= <GND>
+d[4] <= <GND>
+d[3] <= <GND>
+d[2] <= <GND>
+d[1] <= <GND>
+d[0] <= <GND>
+
+
