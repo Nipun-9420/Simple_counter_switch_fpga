@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Simple_counter_switch_fpga
-Mon Dec 25 07:13:33 2023
+Mon Dec 25 09:05:59 2023
 Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
@@ -42,16 +42,16 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +------------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Dec 25 07:13:33 2023       ;
+; Analysis & Synthesis Status        ; Successful - Mon Dec 25 09:05:59 2023       ;
 ; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; Simple_counter_switch_fpga                  ;
 ; Top-level Entity Name              ; Simple_counter_switch_fpga                  ;
 ; Family                             ; MAX 10                                      ;
-; Total logic elements               ; 0                                           ;
-;     Total combinational functions  ; 0                                           ;
-;     Dedicated logic registers      ; 0                                           ;
-; Total registers                    ; 0                                           ;
-; Total pins                         ; 9                                           ;
+; Total logic elements               ; 113                                         ;
+;     Total combinational functions  ; 113                                         ;
+;     Dedicated logic registers      ; 65                                          ;
+; Total registers                    ; 65                                          ;
+; Total pins                         ; 49                                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 0                                           ;
 ; Embedded Multiplier 9-bit elements ; 0                                           ;
@@ -156,10 +156,12 @@ refer to the applicable agreement for further details.
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 1           ;
+; Maximum used               ; 4           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processors 3-4         ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -177,29 +179,30 @@ refer to the applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
+; Estimated Total logic elements              ; 113   ;
 ;                                             ;       ;
-; Total combinational functions               ; 0     ;
+; Total combinational functions               ; 113   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 0     ;
-;     -- 3 input functions                    ; 0     ;
-;     -- <=2 input functions                  ; 0     ;
+;     -- 4 input functions                    ; 27    ;
+;     -- 3 input functions                    ; 14    ;
+;     -- <=2 input functions                  ; 72    ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 0     ;
-;     -- arithmetic mode                      ; 0     ;
+;     -- normal mode                          ; 51    ;
+;     -- arithmetic mode                      ; 62    ;
 ;                                             ;       ;
-; Total registers                             ; 0     ;
-;     -- Dedicated logic registers            ; 0     ;
+; Total registers                             ; 65    ;
+;     -- Dedicated logic registers            ; 65    ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
-; I/O pins                                    ; 9     ;
+; I/O pins                                    ; 49    ;
 ;                                             ;       ;
 ; Embedded Multiplier 9-bit elements          ; 0     ;
 ;                                             ;       ;
-; Maximum fan-out node                        ; clk   ;
-; Maximum fan-out                             ; 1     ;
-; Total fan-out                               ; 9     ;
-; Average fan-out                             ; 0.50  ;
+; Maximum fan-out node                        ; clk_1 ;
+; Maximum fan-out                             ; 33    ;
+; Total fan-out                               ; 545   ;
+; Average fan-out                             ; 1.97  ;
 +---------------------------------------------+-------+
 
 
@@ -208,7 +211,7 @@ refer to the applicable agreement for further details.
 +-----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------+----------------------------+--------------+
 ; Compilation Hierarchy Node  ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name         ; Entity Name                ; Library Name ;
 +-----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------+----------------------------+--------------+
-; |Simple_counter_switch_fpga ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 0            ; 0       ; 0         ; 9    ; 0            ; 0          ; |Simple_counter_switch_fpga ; Simple_counter_switch_fpga ; work         ;
+; |Simple_counter_switch_fpga ; 113 (113)           ; 65 (65)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 49   ; 0            ; 0          ; |Simple_counter_switch_fpga ; Simple_counter_switch_fpga ; work         ;
 +-----------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+-----------------------------+----------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -218,8 +221,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
-; Number of registers using Synchronous Clear  ; 0     ;
+; Total registers                              ; 65    ;
+; Number of registers using Synchronous Clear  ; 32    ;
 ; Number of registers using Synchronous Load   ; 0     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -233,13 +236,22 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; boundary_port         ; 9                           ;
-; cycloneiii_lcell_comb ; 1                           ;
-;     normal            ; 1                           ;
+; boundary_port         ; 49                          ;
+; cycloneiii_ff         ; 65                          ;
+;     SCLR              ; 32                          ;
+;     plain             ; 33                          ;
+; cycloneiii_lcell_comb ; 121                         ;
+;     arith             ; 62                          ;
+;         2 data inputs ; 62                          ;
+;     normal            ; 59                          ;
 ;         0 data inputs ; 1                           ;
+;         1 data inputs ; 9                           ;
+;         2 data inputs ; 8                           ;
+;         3 data inputs ; 14                          ;
+;         4 data inputs ; 27                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 0.00                        ;
-; Average LUT depth     ; 0.00                        ;
+; Max LUT depth         ; 4.40                        ;
+; Average LUT depth     ; 3.28                        ;
 +-----------------------+-----------------------------+
 
 
@@ -258,35 +270,31 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
-    Info: Processing started: Mon Dec 25 07:13:17 2023
+    Info: Processing started: Mon Dec 25 09:05:48 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Simple_counter_switch_fpga -c Simple_counter_switch_fpga
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file simple_counter_switch_fpga.v
-    Info (12023): Found entity 1: Simple_counter_switch_fpga File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 1
+    Info (12023): Found entity 1: Simple_counter_switch_fpga File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 2
 Info (12127): Elaborating entity "Simple_counter_switch_fpga" for the top level hierarchy
-Warning (10034): Output port "d" at Simple_counter_switch_fpga.v(4) has no driver File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-Warning (12158): Entity "Simple_counter_switch_fpga" contains only dangling pins
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "d[7]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[6]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[5]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[4]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[3]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[2]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[1]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
-    Warning (13410): Pin "d[0]" is stuck at GND File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
+    Warning (13410): Pin "d1[7]" is stuck at VCC File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 4
+    Warning (13410): Pin "d2[7]" is stuck at VCC File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 5
+    Warning (13410): Pin "d3[7]" is stuck at VCC File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 6
+    Warning (13410): Pin "d4[7]" is stuck at VCC File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 7
+    Warning (13410): Pin "d5[7]" is stuck at VCC File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 8
+    Warning (13410): Pin "d6[7]" is stuck at VCC File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 10
+Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "clk" File: D:/FPGA/Simple_counter_switch_fpga/Simple_counter_switch_fpga.v Line: 2
-Info (21057): Implemented 9 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 162 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 1 input pins
-    Info (21059): Implemented 8 output pins
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 14 warnings
-    Info: Peak virtual memory: 4745 megabytes
-    Info: Processing ended: Mon Dec 25 07:13:33 2023
-    Info: Elapsed time: 00:00:16
-    Info: Total CPU time (on all processors): 00:00:16
+    Info (21059): Implemented 48 output pins
+    Info (21061): Implemented 113 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 8 warnings
+    Info: Peak virtual memory: 4782 megabytes
+    Info: Processing ended: Mon Dec 25 09:05:59 2023
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:10
 
 

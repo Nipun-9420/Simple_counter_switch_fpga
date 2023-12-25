@@ -1,15 +1,15 @@
-Fitter Status : Successful - Mon Dec 25 07:13:50 2023
+Fitter Status : Successful - Mon Dec 25 09:06:09 2023
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : Simple_counter_switch_fpga
 Top-level Entity Name : Simple_counter_switch_fpga
 Family : MAX 10
 Device : 10M50DAF484C7G
 Timing Models : Final
-Total logic elements : 1 / 49,760 ( < 1 % )
-    Total combinational functions : 1 / 49,760 ( < 1 % )
-    Dedicated logic registers : 0 / 49,760 ( 0 % )
-Total registers : 0
-Total pins : 9 / 360 ( 3 % )
+Total logic elements : 115 / 49,760 ( < 1 % )
+    Total combinational functions : 114 / 49,760 ( < 1 % )
+    Dedicated logic registers : 65 / 49,760 ( < 1 % )
+Total registers : 65
+Total pins : 49 / 360 ( 14 % )
 Total virtual pins : 0
 Total memory bits : 0 / 1,677,312 ( 0 % )
 Embedded Multiplier 9-bit elements : 0 / 288 ( 0 % )
